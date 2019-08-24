@@ -245,10 +245,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Questionnaire\Index.cshtml" />
+    <Content Include="Views\Questionnaire\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Housings\" />
-    <Folder Include="Views\Questionnaire\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
