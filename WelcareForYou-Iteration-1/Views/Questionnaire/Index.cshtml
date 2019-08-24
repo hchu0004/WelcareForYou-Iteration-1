@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Test Page";
 }
+
+@*without token*@
 <div class="col-md-4">
     <form method="post" name="form" action="Result">
         <p>
@@ -18,13 +20,27 @@
     </form>
 </div>
 
-@*
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Result page" class="btn btn-default" />
-        </div>
-    </div>
-*@
+
+@using (Html.BeginForm("Result", "Questionnaire", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <form method="post" name="form" action="Result">
+        <p>
+            Salary:<input type="text" name="salary" />
+        </p>
+        <p>
+            Number of people:<input type="text" name="numOfPeople1" />
+        </p>
+        <p>
+            Current rent:<input type="text" name="currentRent1" />
+        </p>
+        <p>
+            Submit<input type="submit" />
+        </p>
+    </form>
+
+}
+
 
 <div class="row">
     <div class="col-md-4">
