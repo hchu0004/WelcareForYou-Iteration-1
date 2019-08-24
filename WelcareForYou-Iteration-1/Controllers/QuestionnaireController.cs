@@ -20,9 +20,18 @@ namespace WelcareForYou_Iteration_1.Controllers
             return View();
         }
 
+        /*
         [HttpPost]
-        public ActionResult Result(String salary, String numOfPeople1, String currentRent1)
+        [ValidateAntiForgeryToken]
+        //public ActionResult Result(String salary, String numOfPeople1, String currentRent1)
+        public ActionResult Result([Bind(Include = "Id,AgeGroup,Gender,NumOfFamily,Suburb,Salary")] Client client, String salary, String currentRent1, String numOfPeople1)
         {
+            if (ModelState.IsValid)
+            {
+                db.Clients.Add(client);
+                db.SaveChanges();
+            }
+
             var numOfPeople = int.Parse(numOfPeople1);
             var currentRent = int.Parse(currentRent1);
             var acceptableRent = int.Parse(salary) * 0.3;
@@ -46,7 +55,52 @@ namespace WelcareForYou_Iteration_1.Controllers
             diffList.Add(item6diff);
             ViewData["diff"] = diffList;
 
-            return View(housingList);
+            return Redirect("~/Questionnaire/Index");
+
+            //return View(housingList);
+        }
+        */
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //public ActionResult Result(String salary, String numOfPeople1, String currentRent1)
+        public ActionResult Result(String salary, String currentRent1, String numOfPeople1)
+        {
+            
+
+            var numOfPeople = int.Parse(numOfPeople1);
+            var currentRent = int.Parse(currentRent1);
+            var acceptableRent = int.Parse(salary) * 0.3;
+            List<Housing> housingList;
+
+            if (currentRent > acceptableRent)
+            {
+                housingList = db.Housings.Where(x => x.MediumPrice <= acceptableRent)
+                                                .Where(x => x.NumOfRoom >= numOfPeople)
+                                                .OrderByDescending(x => x.MediumPrice).Take(6).ToList();
+
+                List<int> diffList = new List<int>();
+                var item1diff = housingList[0].MediumPrice * 100 / currentRent - 100;
+                var item2diff = housingList[1].MediumPrice * 100 / currentRent - 100;
+                var item3diff = housingList[2].MediumPrice * 100 / currentRent - 100;
+                var item4diff = housingList[3].MediumPrice * 100 / currentRent - 100;
+                var item5diff = housingList[4].MediumPrice * 100 / currentRent - 100;
+                var item6diff = housingList[5].MediumPrice * 100 / currentRent - 100;
+                diffList.Add(item1diff);
+                diffList.Add(item2diff);
+                diffList.Add(item3diff);
+                diffList.Add(item4diff);
+                diffList.Add(item5diff);
+                diffList.Add(item6diff);
+                ViewData["diff"] = diffList;
+                return View(housingList);
+            }
+            else
+            {
+                //chnage to another website           
+                return Redirect("~/Home/Index");
+            }
+            
         }
 
         protected override void HandleUnknownAction(string actionName)
