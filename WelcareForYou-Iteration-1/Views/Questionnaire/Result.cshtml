@@ -1,0 +1,101 @@
+﻿@model IEnumerable<WelcareForYou_Iteration_1.Models.Housing>
+@{
+    ViewBag.Title = "Result";
+}
+
+
+<header id="header">
+    <div class="intro">
+        <div class="overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 intro-text">
+                        <h1>
+                            @ViewBag.Title
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <table id="table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Suburb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MediumPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfRoom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HouseType)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MediumPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseType)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<p>NEWNEW</p>
+<div class="col-md-4">
+
+    @foreach (var item in Model)
+    {
+        <p>@Html.DisplayFor(modelItem => item.Suburb)</p>
+    }
+
+
+    @foreach (var item in @ViewData["diff"] as IEnumerable<int>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayName(item.ToString())
+            </td>
+        </tr>
+    }
+
+        <p>Rent1</p>
+        <p>Diff perventage1</p>
+        <p>@ViewBag.item1diff</p>
+        <p>Rent2</p>
+        <p>Diff perventage2</p>
+        <p>@ViewBag.item2diff</p>
+        <p>Rent3</p>
+        <p>Diff perventage3</p>
+        <p>@ViewBag.item3diff</p>
+        <p>Rent4</p>
+        <p>Diff perventage4</p>
+        <p>@ViewBag.item4diff</p>
+        <p>Rent5</p>
+        <p>Diff perventage5</p>
+        <p>@ViewBag.ite56diff</p>
+        <p>Rent6</p>
+        <p>Diff perventage6</p>
+        <p>@ViewBag.item6diff</p>
+    </div>
